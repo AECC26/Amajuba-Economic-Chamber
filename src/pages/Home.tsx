@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Pickaxe, Factory, ShoppingCart, ArrowRight, Users, TrendingUp, Building } from 'lucide-react';
+import { Pickaxe, Factory, ShoppingCart, ArrowRight, Users, TrendingUp, Building, MapPin, ChevronDown } from 'lucide-react';
 
 export default function Home() {
   const sectors = [
@@ -34,82 +34,174 @@ export default function Home() {
     <div className="flex flex-col">
 
       {/* ── Hero Section ── */}
-      <section className="relative min-h-[700px] flex flex-col items-center justify-center overflow-hidden">
-        {/* Background image */}
+      <section className="relative min-h-screen flex flex-col overflow-hidden bg-chamber-navy">
+
+        {/* Background image with parallax feel */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center scale-105"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2940&auto=format&fit=crop')`,
           }}
         />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-chamber-navy/90 via-chamber-navy/80 to-blue-900/70" />
-        {/* Gold accent line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-chamber-gold via-amber-400 to-chamber-gold" />
 
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center pt-16 md:pt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
-          >
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.05] mb-6 drop-shadow-lg">
-              Promoting{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-chamber-gold">
-                Growth
-              </span>
-              {' '}&amp;{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-chamber-gold to-amber-400">
-                Prosperity
-              </span>
-            </h1>
+        {/* Layered overlays for depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-chamber-navy/95 via-chamber-navy/80 to-chamber-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-chamber-navy/60" />
 
-            <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
-              We serve as a catalyst for sustainable economic development across the Amajuba District — transforming dialogue into action and shared understanding into measurable progress.
-            </p>
+        {/* Decorative geometric shapes */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-chamber-blue/10 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-chamber-gold/10 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/register"
-                className="w-full sm:w-auto px-8 py-4 bg-chamber-gold text-chamber-navy font-bold rounded-full hover:bg-amber-400 transition-all shadow-2xl shadow-amber-900/30 text-lg flex items-center justify-center gap-2 group"
+        {/* Gold top accent */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-chamber-gold to-transparent" />
+
+        {/* Vertical gold rule — desktop only */}
+        <div className="absolute left-[max(2rem,calc(50%-38rem))] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-chamber-gold/30 to-transparent hidden lg:block" />
+
+        {/* Main content — split layout */}
+        <div className="relative z-10 flex-1 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24 lg:py-32">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+              {/* Left column — text */}
+              <div>
+                {/* Location badge */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-chamber-gold/40 bg-chamber-gold/10 text-chamber-gold text-xs font-semibold uppercase tracking-widest mb-8"
+                >
+                  <MapPin size={11} />
+                  Amajuba District · KwaZulu-Natal
+                </motion.div>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-6"
+                >
+                  Promoting{' '}
+                  <span className="relative inline-block">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-chamber-gold to-amber-400">
+                      Growth
+                    </span>
+                    {/* Underline accent */}
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-300 to-chamber-gold rounded-full" />
+                  </span>
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-chamber-gold to-amber-300">
+                    &amp; Prosperity
+                  </span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.25 }}
+                  className="text-lg text-blue-100/90 mb-10 max-w-lg leading-relaxed"
+                >
+                  We serve as a catalyst for sustainable economic development across the Amajuba District — transforming dialogue into action and shared understanding into measurable progress.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-col sm:flex-row gap-4"
+                >
+                  <Link
+                    to="/register"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-chamber-gold text-chamber-navy font-bold rounded-full hover:bg-amber-400 transition-all shadow-xl shadow-amber-900/30 text-base group"
+                  >
+                    Become a Member
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/20 transition-all text-base border border-white/25"
+                  >
+                    Learn More
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Right column — stats cards */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="hidden lg:flex flex-col gap-4"
               >
-                Become a Member
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/about"
-                className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/20 transition-all text-lg border border-white/30"
-              >
-                Learn More
-              </Link>
+                {stats.map((stat, i) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 + i * 0.12, duration: 0.5 }}
+                    className="flex items-center gap-5 bg-white/8 backdrop-blur-md border border-white/15 rounded-2xl px-6 py-5 hover:bg-white/12 transition-colors"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-chamber-gold/20 flex items-center justify-center text-chamber-gold shrink-0">
+                      {stat.icon}
+                    </div>
+                    <div>
+                      <div className="text-3xl font-extrabold text-white leading-none">{stat.value}</div>
+                      <div className="text-sm text-blue-200 font-medium mt-0.5">{stat.label}</div>
+                    </div>
+                    {/* Decorative right bar */}
+                    <div className="ml-auto w-1 h-10 rounded-full bg-gradient-to-b from-chamber-gold/60 to-transparent" />
+                  </motion.div>
+                ))}
+
+                {/* Reg badge */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.85, duration: 0.5 }}
+                  className="mt-2 px-6 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                >
+                  <p className="text-xs text-blue-300/70 font-medium uppercase tracking-widest mb-1">Registered Entity</p>
+                  <p className="text-white/80 text-sm font-semibold">Reg No: 2026 / 354235 / 08</p>
+                </motion.div>
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Mobile stats strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="lg:hidden mt-12 grid grid-cols-3 gap-3"
+            >
+              {stats.map(stat => (
+                <div key={stat.label} className="flex flex-col items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl py-4 px-2">
+                  <div className="text-chamber-gold">{stat.icon}</div>
+                  <span className="text-2xl font-extrabold text-white leading-none">{stat.value}</span>
+                  <span className="text-[10px] text-blue-200 font-medium uppercase tracking-wide text-center">{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
 
-        {/* Stats strip */}
+        {/* Scroll cue */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="relative z-10 w-full max-w-3xl mx-auto px-4 mt-14"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="relative z-10 flex justify-center pb-8"
         >
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl grid grid-cols-3 divide-x divide-white/20">
-            {stats.map(stat => (
-              <div key={stat.label} className="flex flex-col items-center py-5 px-4 gap-1">
-                <div className="text-amber-300">{stat.icon}</div>
-                <span className="text-2xl font-extrabold text-white leading-none">{stat.value}</span>
-                <span className="text-xs text-blue-200 font-medium uppercase tracking-wide">{stat.label}</span>
-              </div>
-            ))}
+          <div className="flex flex-col items-center gap-1 text-white/40">
+            <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
+            <ChevronDown size={16} className="animate-bounce" />
           </div>
         </motion.div>
 
         {/* Bottom wave */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 60 L0 30 Q360 0 720 30 Q1080 60 1440 30 L1440 60 Z" fill="white" />
+          <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+            <path d="M0 80 L0 40 C240 10 480 60 720 40 C960 20 1200 55 1440 35 L1440 80 Z" fill="white" />
           </svg>
         </div>
       </section>
