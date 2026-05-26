@@ -25,3 +25,16 @@ body {
   background: rgba(245, 158, 11, 0.35);
   color: #0f172a;
 }
+
+/* User chat bubbles sit on dark navy — override to a white-tinted selection */
+[data-role="user-bubble"]::selection,
+[data-role="user-bubble"] *::selection {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+[data-role="user-bubble"]::-moz-selection,
+[data-role="user-bubble"] *::-moz-selection {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}

@@ -242,11 +242,14 @@ export default function Chat() {
                 </div>
 
                 {/* Bubble */}
-                <div className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'bg-chamber-navy text-white rounded-tr-sm'
-                    : 'bg-white border border-slate-100 text-slate-700 shadow-sm rounded-tl-sm'
-                }`}>
+                <div
+                  data-role={msg.role === 'user' ? 'user-bubble' : undefined}
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm leading-relaxed select-text ${
+                    msg.role === 'user'
+                      ? 'bg-chamber-navy text-white rounded-tr-sm'
+                      : 'bg-white border border-slate-100 text-slate-700 shadow-sm rounded-tl-sm'
+                  }`}
+                >
                   {msg.content}
                   <div className={`text-[10px] mt-1 ${msg.role === 'user' ? 'text-blue-300' : 'text-slate-400'}`}>
                     {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

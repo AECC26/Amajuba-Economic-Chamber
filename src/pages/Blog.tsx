@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Calendar, Clock, User, Tag, ArrowRight, BookOpen } from 'lucide-react';
+import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Star } from 'lucide-react';
 import { posts } from '../data/posts';
+import { usePostRatingSummaries } from '../hooks/usePostRatingSummary';
 
 export default function Blog() {
+  const ratingSummaries = usePostRatingSummaries(posts.map(p => p.slug));
+
   return (
     <div className="bg-slate-50 min-h-screen">
 
@@ -71,6 +74,27 @@ export default function Blog() {
                       Read article <ArrowRight size={14} />
                     </span>
                   </div>
+
+                  {/* Star rating summary */}
+                  {(() => {
+                    const summary = ratingSummaries[post.slug];
+                    if (!summary || summary.avgRating === null) return null;
+                    const filled = Math.round(summary.avgRating);
+                    return (
+                      <div className="mt-3 flex items-center gap-1.5">
+                        {[1,2,3,4,5].map(s => (
+                          <Star
+                            key={s}
+                            size={13}
+                            className={s <= filled ? 'fill-chamber-gold text-chamber-gold' : 'text-slate-300'}
+                          />
+                        ))}
+                        <span className="text-xs text-slate-400 ml-1">
+                          {summary.avgRating} ({summary.ratingCount} {summary.ratingCount === 1 ? 'rating' : 'ratings'})
+                        </span>
+                      </div>
+                    );
+                  })()}
                 </div>
               </Link>
             </motion.article>

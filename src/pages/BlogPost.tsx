@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Calendar, Clock, User, Tag, ArrowRight, ArrowLeft } from 'lucide-react';
 import { getPostBySlug } from '../data/posts';
+import PostActions from '../components/PostActions';
 
 function formatInlineText(text: string) {
   const fragments: Array<string | ReactNode> = [];
@@ -168,6 +169,9 @@ export default function BlogPost() {
             </motion.div>
           ))}
         </div>
+
+        {/* Like / Rate / Share */}
+        <PostActions slug={post.slug} title={post.title} />
 
         {/* CTA */}
         <motion.div
