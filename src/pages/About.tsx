@@ -1,7 +1,28 @@
 import { motion } from 'motion/react';
 import { Target, Users, Map, Layers, Eye, Compass, BookOpen, Gavel, TrendingUp, Handshake } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export default function About() {
+  useSEO({
+    title: 'About the Chamber',
+    description:
+      'Learn about the Amajuba Economic Chamber of Commerce — our vision, mission, community empowerment programmes, and regional footprint across the Amajuba District, KwaZulu-Natal.',
+    path: '/about',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'About the Amajuba Economic Chamber of Commerce',
+      url: 'https://amajubaeconomicchamber.org/about',
+      description:
+        'Vision, mission, community empowerment programmes, and regional footprint of the Amajuba Economic Chamber of Commerce.',
+      mainEntity: {
+        '@type': 'Organization',
+        name: 'Amajuba Economic Chamber of Commerce',
+        url: 'https://amajubaeconomicchamber.org',
+      },
+    },
+  });
+
   const footprint = ['Dannhauser', 'Utrecht', 'Osizweni', 'Madadeni', 'Newcastle', 'Charlestown'];
 
   const programmes = [

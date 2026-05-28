@@ -4,6 +4,7 @@ import { CheckCircle2, ChevronRight, ChevronLeft, User, Building2, Star, Message
 import { supabase, supabaseRegistrationsTable, supabaseStorageBucket } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 import RegistrationDocumentUpload from '../components/RegistrationDocumentUpload';
+import { useSEO } from '../hooks/useSEO';
 
 const STEPS = [
   { id: 1, title: 'Applicant Information', icon: User },
@@ -258,6 +259,19 @@ const persistRegistration = async (payload: Record<string, unknown>) => {
 };
 
 export default function Registration() {
+  useSEO({
+    title: 'Member Registration',
+    description: 'Apply for membership with the Amajuba Economic Chamber of Commerce. Join 500+ members driving economic growth across the Amajuba District.',
+    path: '/register',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Amajuba Economic Chamber — Member Registration',
+      url: 'https://amajubaeconomicchamber.org/register',
+      description: 'Apply for membership with the Amajuba Economic Chamber of Commerce.',
+    },
+  });
+
   const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);

@@ -1,8 +1,29 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Pickaxe, Factory, ShoppingCart, ArrowRight, Users, TrendingUp, Building, MapPin, ChevronDown } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Home() {
+  useSEO({
+    title: 'Amajuba Economic Chamber of Commerce | Promoting Growth & Prosperity',
+    description:
+      'The Amajuba Economic Chamber of Commerce drives sustainable economic development across the Amajuba District, KwaZulu-Natal. 500+ members. Primary, Secondary & Tertiary sectors.',
+    path: '/',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Amajuba Economic Chamber of Commerce',
+      url: 'https://amajubaeconomicchamber.org',
+      description:
+        'Driving sustainable economic development across the Amajuba District, KwaZulu-Natal, South Africa.',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://amajubaeconomicchamber.org/blog?q={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
+    },
+  });
+
   const sectors = [
     {
       title: 'Primary Sector',

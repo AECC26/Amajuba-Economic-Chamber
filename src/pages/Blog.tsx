@@ -3,8 +3,32 @@ import { motion } from 'motion/react';
 import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Star } from 'lucide-react';
 import { posts } from '../data/posts';
 import { usePostRatingSummaries } from '../hooks/usePostRatingSummary';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Blog() {
+  useSEO({
+    title: 'Blog — Chamber Insights',
+    description:
+      'In-depth articles on economic development, community empowerment, tendering, governance, and the work of the Amajuba Economic Chamber of Commerce.',
+    path: '/blog',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Amajuba Economic Chamber — Chamber Insights',
+      url: 'https://amajubaeconomicchamber.org/blog',
+      description:
+        'Articles on economic development, community empowerment, and the work of the Amajuba Economic Chamber of Commerce.',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Amajuba Economic Chamber of Commerce',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://amajubaeconomicchamber.org/logo.jpg',
+        },
+      },
+    },
+  });
+
   const ratingSummaries = usePostRatingSummaries(posts.map(p => p.slug));
 
   return (

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Private member pages — no indexing
+Disallow: /dashboard
+Disallow: /auth
+
+Sitemap: https://amajubaeconomicchamber.org/sitemap.xml

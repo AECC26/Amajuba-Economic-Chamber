@@ -1,7 +1,34 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { useState } from 'react';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Contact() {
+  useSEO({
+    title: 'Contact Us',
+    description:
+      'Get in touch with the Amajuba Economic Chamber of Commerce. Visit us at Madadeni Sec 6, Red Street, or call 067 198 4100 / 068 334 1826.',
+    path: '/contact',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact the Amajuba Economic Chamber of Commerce',
+      url: 'https://amajubaeconomicchamber.org/contact',
+      mainEntity: {
+        '@type': 'Organization',
+        name: 'Amajuba Economic Chamber of Commerce',
+        telephone: ['+27-67-198-4100', '+27-68-334-1826'],
+        email: 'amajubaeconomicchamber.office@gmail.com',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Madadeni Sec 6, Red Street, Industrial Side, Unit 9',
+          addressLocality: 'Madadeni',
+          addressRegion: 'KwaZulu-Natal',
+          addressCountry: 'ZA',
+        },
+      },
+    },
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',

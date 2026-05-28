@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AlertTriangle, ArrowRight, CheckCircle2, Clock3, Edit, LoaderCircle, Mail, Save, ShieldCheck, UserRound, X } from 'lucide-react';
 import { supabase, supabaseRegistrationsTable } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
+import { useSEO } from '../hooks/useSEO';
 
 type ProfileForm = {
   first_name: string;
@@ -23,6 +24,14 @@ const statusStyles: Record<string, string> = {
 };
 
 export default function Dashboard() {
+  useSEO({
+    title: 'Member Dashboard',
+    description: 'Manage your Amajuba Economic Chamber of Commerce membership profile and track your application status.',
+    path: '/dashboard',
+    noIndex: true,
+    structuredData: null,
+  });
+
   const { user, session, signOut } = useAuth();
   const [profile, setProfile] = useState<ProfileForm>(emptyProfile(user?.email ?? ''));
   const [loading, setLoading] = useState(true);
@@ -125,9 +134,9 @@ export default function Dashboard() {
   const statusColor = statusStyles[status] ?? statusStyles['Not started'];
 
   return (
-    <div className="bg-slate-50 min-h-screen py-12">
+    <div className="bg-slate-50 min-h-screen py-8 sm:py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_1.4fr]">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-[1.1fr_1.4fr]">
           <div className="space-y-6">
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-chamber-blue">Your member dashboard</p>
@@ -137,13 +146,13 @@ export default function Dashboard() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-semibold ${statusColor}`}>
+                <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-semibold shrink-0 ${statusColor}`}>
                   {status === 'Approved' ? <ShieldCheck size={16} /> : status === 'Pending' ? <Clock3 size={16} /> : <AlertTriangle size={16} />}
                   {status}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700">
-                  <Mail size={16} className="text-chamber-blue" />
-                  {user?.email ?? 'Signed out'}
+                <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700 min-w-0 max-w-full">
+                  <Mail size={16} className="text-chamber-blue shrink-0" />
+                  <span className="truncate">{user?.email ?? 'Signed out'}</span>
                 </span>
               </div>
             </div>
@@ -187,12 +196,12 @@ export default function Dashboard() {
           </div>
 
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between gap-4">
-              <div>
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
                 <h2 className="text-lg font-bold text-chamber-navy">Edit profile details</h2>
                 <p className="mt-1 text-sm text-slate-500">Update your personal information below.</p>
               </div>
-              <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+              <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 shrink-0">
                 {status}
               </div>
             </div>
@@ -263,15 +272,16 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
-                  <div className="flex items-center gap-2 text-sm text-slate-500">
-                    <UserRound size={16} className="text-chamber-blue" />
-                    Signed in as <span className="font-semibold text-slate-700">{user?.email}</span>
+                <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-3 border-t border-slate-100 pt-4">
+                  <div className="flex items-center gap-2 text-sm text-slate-500 min-w-0">
+                    <UserRound size={16} className="text-chamber-blue shrink-0" />
+                    <span className="shrink-0">Signed in as</span>
+                    <span className="font-semibold text-slate-700 truncate">{user?.email}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setIsEditMode(true)}
-                    className="inline-flex items-center gap-2 rounded-full bg-chamber-navy px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 transition-all"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-chamber-navy px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 transition-all w-full sm:w-auto"
                   >
                     Edit profile
                     <Edit size={16} />
@@ -336,16 +346,17 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
-                  <div className="flex items-center gap-2 text-sm text-slate-500">
-                    <UserRound size={16} className="text-chamber-blue" />
-                    Signed in as <span className="font-semibold text-slate-700">{user?.email}</span>
+                <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-3 border-t border-slate-100 pt-4">
+                  <div className="flex items-center gap-2 text-sm text-slate-500 min-w-0">
+                    <UserRound size={16} className="text-chamber-blue shrink-0" />
+                    <span className="shrink-0">Signed in as</span>
+                    <span className="font-semibold text-slate-700 truncate">{user?.email}</span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 w-full sm:w-auto">
                     <button
                       type="button"
                       onClick={() => setIsEditMode(false)}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-all"
+                      className="inline-flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-all"
                     >
                       Cancel
                       <X size={16} />
@@ -353,7 +364,7 @@ export default function Dashboard() {
                     <button
                       type="submit"
                       disabled={saving}
-                      className="inline-flex items-center gap-2 rounded-full bg-chamber-navy px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70 transition-all"
+                      className="inline-flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full bg-chamber-navy px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70 transition-all"
                     >
                       {saving ? 'Saving…' : 'Save profile'}
                       <Save size={16} />

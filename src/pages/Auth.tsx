@@ -2,8 +2,17 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, LockKeyhole, Mail, UserRound } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Auth() {
+  useSEO({
+    title: 'Sign In — Member Portal',
+    description: 'Sign in or create an account to access the Amajuba Economic Chamber of Commerce member portal.',
+    path: '/auth',
+    noIndex: true,
+    structuredData: null,
+  });
+
   const location = useLocation();
   const navigate = useNavigate();
   const { user, loading, signIn, signUp } = useAuth();
