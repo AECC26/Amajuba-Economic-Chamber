@@ -37,24 +37,17 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-slate-100 overflow-hidden">
+            <div className="w-12 h-12 rounded-full shrink-0 overflow-hidden shadow-sm border border-slate-100 bg-white">
               <img
-                src="/logo.jpg"
+                src="/logo-square.jpg"
                 alt="Amajuba Economic Chamber Logo"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const sibling = target.nextElementSibling as HTMLElement | null;
-                  if (sibling) sibling.style.display = 'flex';
+                  target.src = '/logo.jpg';
+                  target.className = 'w-full h-full object-contain p-1';
                 }}
               />
-              <div
-                style={{ display: 'none' }}
-                className="w-full h-full bg-chamber-navy flex-col items-center justify-center text-white"
-              >
-                <span className="text-xs font-bold text-chamber-lightgold leading-none">AEC</span>
-              </div>
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-bold text-chamber-navy text-lg uppercase">AMAJUBA ECONOMIC</span>

@@ -2,21 +2,7 @@ import { useState, useRef, useEffect, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, Bot, User, Loader2, MessageCircle, RefreshCw } from 'lucide-react';
 
-const TOGETHER_API_KEY = import.meta.env.VITE_TOGETHER_API_KEY as string | undefined;
-const TOGETHER_MODEL = (import.meta.env.VITE_TOGETHER_MODEL as string | undefined) ?? 'openai/gpt-oss-20b';
-
-const SYSTEM_PROMPT = `You are the official virtual assistant for the Amajuba Economic Chamber of Commerce, based in the Amajuba District of KwaZulu-Natal, South Africa. Registration number: 2026 / 354235 / 08.
-
-Your role is to warmly and helpfully answer questions about:
-- The Chamber's vision, mission, and strategic framework
-- The three economic sectors: Primary (Agriculture & Mining), Secondary (Manufacturing & Processing), Tertiary (Services & Distribution)
-- Community empowerment programmes (governance literacy, tendering & procurement, fund management, LED partnerships)
-- Membership categories and the registration process
-- The Chamber's governance structure and leadership
-- Local Economic Development (LED) initiatives in the Amajuba District
-- Contact information: amajubaeconomicchamber.office@gmail.com | 067 198 4100 / 068 334 1826 | Madadeni Sec 6, Red Street, Industrial Side, Unit 9, KwaZulu-Natal
-
-Speak professionally but warmly. Keep answers concise and helpful. If asked something outside the Chamber's scope, politely redirect to what you can help with. Always represent the Chamber's values of promoting growth, prosperity, and community empowerment.`;
+// API key and model are server-side only — see server.js /api/chat
 
 interface Message {
   id: string;
@@ -125,55 +111,27 @@ export default function Chat() {
     setInput('');
     setLoading(true);
 
-    if (!TOGETHER_API_KEY) {
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: 'The AI assistant is not yet configured. Please add a VITE_TOGETHER_API_KEY to the environment config to enable this feature. You can contact us directly at amajubaeconomicchamber.office@gmail.com or call 067 198 4100.',
-          timestamp: new Date(),
-        }]);
-        setLoading(false);
-      }, 600);
-      return;
-    }
-
     try {
-      const response = await fetch('https://api.together.xyz/v1/chat/completions', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${TOGETHER_API_KEY}`,
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: TOGETHER_MODEL,
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...conversation
-              .filter(m => m.id !== '0')
-              .map(m => ({
-                role: m.role === 'user' ? 'user' as const : 'assistant' as const,
-                content: m.content,
-              })),
-          ],
-          temperature: 0.7,
-          max_tokens: 500,
+          messages: conversation
+            .filter(m => m.id !== '0')
+            .map(m => ({ role: m.role, content: m.content })),
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.error?.message ?? 'Together AI request failed');
+        throw new Error(data?.message ?? 'Chat request failed');
       }
-
-      const message = data?.choices?.[0]?.message;
-      const reply = (message?.content?.trim() || message?.reasoning?.trim() || "I'm sorry, I couldn't generate a response. Please try again.");
 
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: reply,
+        content: data.reply ?? "I'm sorry, I couldn't generate a response. Please try again.",
         timestamp: new Date(),
       }]);
     } catch {
@@ -228,12 +186,6 @@ export default function Chat() {
 
           {/* Right controls */}
           <div className="flex items-center gap-2 shrink-0">
-            {!TOGETHER_API_KEY && (
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-200 rounded-full text-amber-700 text-[10px] font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                AI not configured
-              </span>
-            )}
             <button
               onClick={resetChat}
               title="New conversation"
@@ -244,15 +196,7 @@ export default function Chat() {
           </div>
         </div>
 
-        {/* Mobile-only: AI not configured warning */}
-        {!TOGETHER_API_KEY && (
-          <div className="sm:hidden px-3 pb-2">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 text-xs font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
-              AI not yet configured — responses will be limited
-            </div>
-          </div>
-        )}
+
       </div>
 
       {/* ── Scrollable messages area ── */}

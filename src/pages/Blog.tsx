@@ -23,7 +23,7 @@ export default function Blog() {
         name: 'Amajuba Economic Chamber of Commerce',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://amajubaeconomicchamber.org/logo.jpg',
+          url: 'https://amajubaeconomicchamber.org/logo-square.jpg',
         },
       },
     },
