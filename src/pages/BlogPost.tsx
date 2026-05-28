@@ -101,7 +101,7 @@ function BlogPostSEO({ post }: { post: NonNullable<ReturnType<typeof getPostBySl
         name: 'Amajuba Economic Chamber of Commerce',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://amajubaeconomicchamber.org/logo.jpg',
+          url: 'https://amajubaeconomicchamber.org/logo-square.jpg',
         },
       },
       mainEntityOfPage: {
