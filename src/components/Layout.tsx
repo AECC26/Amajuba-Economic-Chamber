@@ -8,9 +8,9 @@ export default function Layout() {
   const isChat = pathname === '/chat';
 
   return (
-    <div className={`flex flex-col ${isChat ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
+    <div className={`flex flex-col ${isChat ? 'min-h-0' : 'min-h-screen'}`}>
       <Navbar />
-      <main className={isChat ? 'flex-1 overflow-hidden flex flex-col' : 'flex-grow'}>
+      <main className={isChat ? 'flex-1 min-h-0 flex flex-col' : 'flex-grow'}>
         <Outlet />
       </main>
       {!isChat && <Footer />}
