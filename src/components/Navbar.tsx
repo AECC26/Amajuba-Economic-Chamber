@@ -46,11 +46,14 @@ export default function Navbar() {
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                   const sibling = target.nextElementSibling as HTMLElement | null;
-                  if (sibling) sibling.classList.remove('hidden');
+                  if (sibling) sibling.style.display = 'flex';
                 }}
               />
-              <div className="hidden w-full h-full bg-chamber-navy flex-col items-center justify-center text-white">
-                <div className="w-6 h-6 border-t-2 border-r-2 border-chamber-lightgold rotate-45 transform -translate-x-1 translate-y-1" />
+              <div
+                style={{ display: 'none' }}
+                className="w-full h-full bg-chamber-navy flex-col items-center justify-center text-white"
+              >
+                <span className="text-xs font-bold text-chamber-lightgold leading-none">AEC</span>
               </div>
             </div>
             <div className="flex flex-col leading-none">

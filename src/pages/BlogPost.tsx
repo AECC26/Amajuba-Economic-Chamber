@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Calendar, Clock, User, Tag, ArrowRight, ArrowLeft } from 'lucide-react';
 import { getPostBySlug } from '../data/posts';
 import PostActions from '../components/PostActions';
+import { useSEO } from '../hooks/useSEO';
 
 function formatInlineText(text: string) {
   const fragments: Array<string | ReactNode> = [];
@@ -76,6 +77,42 @@ function renderSectionBody(body: string) {
   });
 }
 
+function BlogPostSEO({ post }: { post: NonNullable<ReturnType<typeof getPostBySlug>> }) {
+  useSEO({
+    title: post.title,
+    description: post.excerpt,
+    path: `/blog/${post.slug}`,
+    ogImage: post.coverImage,
+    ogImageAlt: post.title,
+    ogType: 'article',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: post.coverImage,
+      datePublished: post.date,
+      author: {
+        '@type': 'Person',
+        name: post.author,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Amajuba Economic Chamber of Commerce',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://amajubaeconomicchamber.org/logo.jpg',
+        },
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://amajubaeconomicchamber.org/blog/${post.slug}`,
+      },
+    },
+  });
+  return null;
+}
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = getPostBySlug(slug ?? '');
@@ -84,6 +121,7 @@ export default function BlogPost() {
 
   return (
     <div className="bg-slate-50 min-h-screen">
+      <BlogPostSEO post={post} />
 
       {/* Cover hero */}
       <div className="relative h-72 md:h-[480px] overflow-hidden">
