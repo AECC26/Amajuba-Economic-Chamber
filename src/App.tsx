@@ -8,7 +8,6 @@ import Contact from './pages/Contact';
 import Registration from './pages/Registration';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import Chat from './pages/Chat';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
 
@@ -40,7 +39,6 @@ export default function App() {
             <Route path="auth" element={<Auth />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogPost />} />
-            <Route path="chat" element={<Chat />} />
           </Route>
         </Routes>
       </BrowserRouter>

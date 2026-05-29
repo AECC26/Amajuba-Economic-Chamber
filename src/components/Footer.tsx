@@ -61,9 +61,6 @@ export default function Footer() {
                 <Link to="/blog" className="text-slate-300 hover:text-white transition-colors text-sm">Blog</Link>
               </li>
               <li>
-                <Link to="/chat" className="text-slate-300 hover:text-white transition-colors text-sm">Chat with Us</Link>
-              </li>
-              <li>
                 <Link to="/contact" className="text-slate-300 hover:text-white transition-colors text-sm">Contact Information</Link>
               </li>
               <li>

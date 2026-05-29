@@ -229,12 +229,6 @@ export default function BlogPost() {
             >
               Become a Member <ArrowRight size={16} />
             </Link>
-            <Link
-              to="/chat"
-              className="inline-flex items-center gap-2 px-7 py-3 bg-white/10 text-white font-semibold rounded-full hover:bg-white/20 transition-colors border border-white/20"
-            >
-              Ask the Chamber AI
-            </Link>
           </div>
         </motion.div>
 
