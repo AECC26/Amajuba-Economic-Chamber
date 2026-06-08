@@ -25,12 +25,12 @@ npm install
 2. Create a `.env.local` file in the repository root and provide the required variables (see `.env.example`):
 
 - `VITE_TOGETHER_API_KEY` — (optional) Together AI / LLM API key for chat
-- `VITE_TOGETHER_MODEL` — model identifier (defaults to `openai/gpt-oss-20b`)
+- `VITE_TOGETHER_MODEL` — model identifier (choose specific AI model)
 - `VITE_SUPABASE_URL` — your Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` — your Supabase anon/public key
-- `VITE_SUPABASE_REGISTRATIONS_TABLE` — table name (default: `registrations`)
-- `VITE_SUPABASE_STORAGE_BUCKET` — storage bucket (default: `Registrations`)
-- `VITE_APP_URL` — application URL used for redirects (e.g. `http://localhost:5000`)
+- `VITE_SUPABASE_REGISTRATIONS_TABLE` — table name ('your registrations table`)
+- `VITE_SUPABASE_STORAGE_BUCKET` — storage bucket ('your storage bucket`)
+- `VITE_APP_URL` — application URL used for redirects (e.g. `http://localhost:3000`)
 
 3. Start the dev server
 
