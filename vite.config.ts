@@ -16,5 +16,13 @@ export default defineConfig({
     allowedHosts: true,
     hmr: !disableHmr,
     watch: disableHmr ? null : {},
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8787',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path,
+      },
+    },
   },
 });

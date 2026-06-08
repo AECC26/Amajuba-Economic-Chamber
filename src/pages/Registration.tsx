@@ -385,6 +385,25 @@ export default function Registration() {
       };
 
       await persistRegistration(payload);
+      // Attempt to send a welcome email via the backend AI+SMTP workflow.
+      try {
+        const apiBase = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, '') || '';
+        const isDevHost = import.meta.env.DEV || (typeof window !== 'undefined' && window.location.origin.includes('localhost'));
+        const requestUrl = isDevHost ? '/api/send-welcome' : (apiBase ? `${apiBase}/api/send-welcome` : '/api/send-welcome');
+
+        fetch(requestUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: applicantEmail,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+          }),
+        }).catch((err) => console.error('Failed to trigger welcome email:', err));
+      } catch (err) {
+        console.error('send-welcome request failed:', err);
+      }
+
       setSubmitted(true);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'There was a problem saving your registration. Please try again.';
@@ -413,7 +432,7 @@ export default function Registration() {
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Contact the Chamber</p>
               <div className="flex items-center gap-3 text-sm text-slate-600"> 
               <Mail size={16} className="text-chamber-blue shrink-0" />
-              <span>amajubaeconomicchamber.office@gmail.com</span>
+              <span>admin@amajubaeconomicchamber.org</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-slate-600">
               <Phone size={16} className="text-chamber-blue shrink-0" />

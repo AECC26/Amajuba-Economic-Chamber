@@ -61,7 +61,7 @@ export default function Footer() {
                 <Link to="/blog" className="text-slate-300 hover:text-white transition-colors text-sm">Blog</Link>
               </li>
               <li>
-                <Link to="/contact" className="text-slate-300 hover:text-white transition-colors text-sm">Contact Information</Link>
+                <Link to="/contact" className="text-slate-300 hover:text-white transition-colors text-sm">Contact Us</Link>
               </li>
               <li>
                 <Link to="/register" className="text-slate-300 hover:text-white transition-colors text-sm">Online Registration</Link>
@@ -89,8 +89,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-4">
                 <Mail className="text-chamber-lightgold shrink-0" size={18} />
-                <a href="mailto:amajubaeconomicchamber.office@gmail.com" className="text-slate-300 hover:text-white transition-colors text-sm">
-                  amajubaeconomicchamber.office@gmail.com
+                <a href="mailto:admin@amajubaeconomicchamber.org" className="text-slate-300 hover:text-white transition-colors text-sm">
+                  admin@amajubaeconomicchamber.org
                 </a>
               </li>
             </ul>

@@ -14,9 +14,9 @@ const publicNavLinks = [
 const authNavLinks = [
   { title: 'Home', path: '/', icon: Home },
   { title: 'Blog', path: '/blog', icon: BookOpen },
+  { title: 'Contact', path: '/contact', icon: Phone },
   { title: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   { title: 'About Us', path: '/about', icon: Info },
-  { title: 'Contact', path: '/contact', icon: Phone },
 ];
 
 const activeDesktopClass = 'text-chamber-navy border-b-2 border-chamber-lightgold -mb-[2px] pb-[22px]';

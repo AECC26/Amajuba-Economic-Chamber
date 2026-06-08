@@ -4,12 +4,13 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home';
 import About from './pages/About';
-import Contact from './pages/Contact';
 import Registration from './pages/Registration';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import Contact from './pages/Contact';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
+import Chat from './pages/Chat';
 
 export default function App() {
   return (
@@ -19,7 +20,6 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
             <Route
               path="register"
               element={
@@ -39,6 +39,8 @@ export default function App() {
             <Route path="auth" element={<Auth />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogPost />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="chat" element={<Chat />} />
           </Route>
         </Routes>
       </BrowserRouter>

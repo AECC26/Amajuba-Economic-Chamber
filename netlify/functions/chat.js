@@ -61,3 +61,4 @@ export const handler = async (event) => {
       body: JSON.stringify({ message: 'Unable to reach the AI service.' }),
     };
   }
+};
